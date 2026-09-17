@@ -1,1 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Central Engineering Works - Theme Selection</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f3f6fa;
+    color:#172033;
+}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#071d3b,#0b4f8a);
+    color:#fff;
+    padding:25px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.logo-area h1{
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.logo-area p{
+    color:#d7e8f8;
+    font-size:14px;
+}
+
+.header-badge{
+    background:#e21f26;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* PAGE */
+.container{
+    width:92%;
+    max-width:1450px;
+    margin:35px auto;
+}
+
+.intro{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.intro h2{
+    font-size:32px;
+    margin-bottom:10px;
+    color:#092c52;
+}
+
+.intro p{
+    color:#687386;
+}
+
+/* THEME GRID */
+.theme-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+/* CARD */
+.theme-card{
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    border:2px solid transparent;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.theme-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(0,0,0,.13);
+}
+
+.theme-card.selected{
+    border-color:#e21f26;
+}
+
+/* CARD TOP */
+.card-top{
+    padding:17px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #e8edf3;
+}
+
+.theme-name{
+    font-size:19px;
+    font-weight:bold;
+    color:#092c52;
+}
+
+.theme-number{
+    background:#092c52;
+    color:#fff;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* PREVIEW */
+.preview{
+    height:390px;
+    background:#e8edf3;
+    position:relative;
+    overflow:hidden;
+}
+
+.preview iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    background:#fff;
+}
+
+/* OVERLAY */
+.preview-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(5,20,40,.0);
+    transition:.3s;
+    pointer-events:none;
+}
+
+.theme-card:hover .preview-overlay{
+    background:rgba(5,20,40,.18);
+}
+
+.preview-button{
+    opacity:0;
+    transform:translateY(10px);
+    transition:.3s;
+    pointer-events:auto;
+    background:#e21f26;
+    color:#fff;
+    border:0;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.theme-card:hover .preview-button{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* CARD BOTTOM */
+.card-bottom{
+    padding:18px 20px;
+}
+
+.theme-info{
+    color:#687386;
+    font-size:13px;
+    margin-bottom:15px;
+    line-height:1.5;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    border:0;
+    cursor:pointer;
+    padding:11px 18px;
+    border-radius:7px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.select-btn{
+    background:#092c52;
+    color:#fff;
+    flex:1;
+}
+
+.select-btn:hover{
+    background:#0b4f8a;
+}
+
+.selected .select-btn{
+    background:#e21f26;
+}
+
+.open-btn{
+    background:#eef3f8;
+    color:#092c52;
+}
+
+/* SELECTED STATUS */
+.status{
+    display:none;
+    color:#e21f26;
+    font-size:12px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.selected .status{
+    display:block;
+}
+
+/* FULL PREVIEW MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    padding:25px;
+}
+
+.modal.active{
+    display:block;
+}
+
+.modal-box{
+    width:100%;
+    height:100%;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+}
+
+.modal-header{
+    height:55px;
+    background:#092c52;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+}
+
+.modal-header h3{
+    font-size:16px;
+}
+
+.close{
+    border:0;
+    background:#e21f26;
+    color:#fff;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.modal iframe{
+    width:100%;
+    height:calc(100% - 55px);
+    border:0;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:30px;
+    color:#7b8797;
+    font-size:13px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+    .theme-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        flex-direction:column;
+        text-align:center;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .container{
+        width:94%;
+        margin:25px auto;
+    }
+
+    .intro h2{
+        font-size:25px;
+    }
+
+    .preview{
+        height:300px;
+    }
+
+    .card-top{
+        padding:14px;
+    }
+
+    .card-bottom{
+        padding:15px;
+    }
+
+    .modal{
+        padding:8px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo-area">
+        <h1>Central Engineering Works</h1>
+        <p>Website Theme Selection</p>
+    </div>
+
+    <div class="header-badge">
+        5 Theme Options
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <div class="intro">
+
+        <h2>Select Your Website Theme</h2>
+
+        <p>
+            Review the available engineering & industrial website designs
+            and select your preferred theme.
+        </p>
+
+    </div>
+
+
+    <div class="theme-grid">
+
+
+        <!-- THEME 01 -->
+
+        <div class="theme-card" data-theme="Loxicat">
+
+            <div class="card-top">
+
+                <div class="theme-name">
+                    Loxicat
+                </div>
+
+                <div class="theme-number">
+                    01
+                </div>
+
+            </div>
+
+            <div class="preview">
+
+                <iframe
+                    src="https://html.xeontheme.com/loxicat/index.html"
+                    loading="lazy">
+                </iframe>
+
+                <div class="preview-overlay">
+
+                    <button
+                        class="preview-button"
+                        onclick="openPreview(
+                        'Loxicat',
+                        'https://html.xeontheme.com/loxicat/index.html'
+                        )">
+                        Full Preview
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <div class="theme-info">
+                    Industrial / Engineering theme with
+                    services, projects, team and company sections.
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        class="btn select-btn"
+                        onclick="selectTheme(this)">
+                        Select Theme
+                    </button>
+
+                    <button
+                        class="btn open-btn"
+                        onclick="openPreview(
+                        'Loxicat',
+                        'https://html.xeontheme.com/loxicat/index.html'
+                        )">
+                        Preview
+                    </button>
+
+                </div>
+
+                <div class="status">
+                    ✓ Selected Theme
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- THEME 02 -->
+
+        <div class="theme-card" data-theme="Manrox">
+
+            <div class="card-top">
+
+                <div class="theme-name">
+                    Manrox
+                </div>
+
+                <div class="theme-number">
+                    02
+                </div>
+
+            </div>
+
+            <div class="preview">
+
+                <iframe
+                    src="https://live.themewild.com/manrox/index.html"
+                    loading="lazy">
+                </iframe>
+
+                <div class="preview-overlay">
+
+                    <button
+                        class="preview-button"
+                        onclick="openPreview(
+                        'Manrox',
+                        'https://live.themewild.com/manrox/index.html'
+                        )">
+                        Full Preview
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <div class="theme-info">
+                    Modern manufacturing and engineering
+                    design with services, projects and statistics.
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        class="btn select-btn"
+                        onclick="selectTheme(this)">
+                        Select Theme
+                    </button>
+
+                    <button
+                        class="btn open-btn"
+                        onclick="openPreview(
+                        'Manrox',
+                        'https://live.themewild.com/manrox/index.html'
+                        )">
+                        Preview
+                    </button>
+
+                </div>
+
+                <div class="status">
+                    ✓ Selected Theme
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- THEME 03 -->
+
+        <div class="theme-card" data-theme="Oilix">
+
+            <div class="card-top">
+
+                <div class="theme-name">
+                    Oilix
+                </div>
+
+                <div class="theme-number">
+                    03
+                </div>
+
+            </div>
+
+            <div class="preview">
+
+                <iframe
+                    src="https://oilix-html.wpthemeverse.com/index.html"
+                    loading="lazy">
+                </iframe>
+
+                <div class="preview-overlay">
+
+                    <button
+                        class="preview-button"
+                        onclick="openPreview(
+                        'Oilix',
+                        'https://oilix-html.wpthemeverse.com/index.html'
+                        )">
+                        Full Preview
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <div class="theme-info">
+                    Oil, gas and industrial style suitable
+                    for engineering and manufacturing companies.
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        class="btn select-btn"
+                        onclick="selectTheme(this)">
+                        Select Theme
+                    </button>
+
+                    <button
+                        class="btn open-btn"
+                        onclick="openPreview(
+                        'Oilix',
+                        'https://oilix-html.wpthemeverse.com/index.html'
+                        )">
+                        Preview
+                    </button>
+
+                </div>
+
+                <div class="status">
+                    ✓ Selected Theme
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- THEME 04 -->
+
+        <div class="theme-card" data-theme="Phactorize">
+
+            <div class="card-top">
+
+                <div class="theme-name">
+                    Phactorize
+                </div>
+
+                <div class="theme-number">
+                    04
+                </div>
+
+            </div>
+
+            <div class="preview">
+
+                <iframe
+                    src="https://themeearth.com/tf/html/phactorize/index.html"
+                    loading="lazy">
+                </iframe>
+
+                <div class="preview-overlay">
+
+                    <button
+                        class="preview-button"
+                        onclick="openPreview(
+                        'Phactorize',
+                        'https://themeearth.com/tf/html/phactorize/index.html'
+                        )">
+                        Full Preview
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <div class="theme-info">
+                    Professional factory and industrial
+                    presentation style.
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        class="btn select-btn"
+                        onclick="selectTheme(this)">
+                        Select Theme
+                    </button>
+
+                    <button
+                        class="btn open-btn"
+                        onclick="openPreview(
+                        'Phactorize',
+                        'https://themeearth.com/tf/html/phactorize/index.html'
+                        )">
+                        Preview
+                    </button>
+
+                </div>
+
+                <div class="status">
+                    ✓ Selected Theme
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- THEME 05 -->
+
+        <div class="theme-card" data-theme="Bulidx">
+
+            <div class="card-top">
+
+                <div class="theme-name">
+                    Bulidx
+                </div>
+
+                <div class="theme-number">
+                    05
+                </div>
+
+            </div>
+
+            <div class="preview">
+
+                <iframe
+                    src="https://bulidx-html.vercel.app/index-3.html"
+                    loading="lazy">
+                </iframe>
+
+                <div class="preview-overlay">
+
+                    <button
+                        class="preview-button"
+                        onclick="openPreview(
+                        'Bulidx',
+                        'https://bulidx-html.vercel.app/index-3.html'
+                        )">
+                        Full Preview
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <div class="theme-info">
+                    Construction and engineering focused
+                    modern website layout.
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        class="btn select-btn"
+                        onclick="selectTheme(this)">
+                        Select Theme
+                    </button>
+
+                    <button
+                        class="btn open-btn"
+                        onclick="openPreview(
+                        'Bulidx',
+                        'https://bulidx-html.vercel.app/index-3.html'
+                        )">
+                        Preview
+                    </button>
+
+                </div>
+
+                <div class="status">
+                    ✓ Selected Theme
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<div class="footer">
+    Central Engineering Works © 2026
+</div>
+
+
+
+<!-- FULL PREVIEW -->
+
+<div class="modal" id="previewModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3 id="modalTitle">
+                Theme Preview
+            </h3>
+
+            <button
+                class="close"
+                onclick="closePreview()">
+                ×
+            </button>
+
+        </div>
+
+        <iframe
+            id="modalFrame"
+            src="">
+        </iframe>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* SELECT THEME */
+
+function selectTheme(button){
+
+    const cards =
+        document.querySelectorAll(".theme-card");
+
+    cards.forEach(card => {
+
+        card.classList.remove("selected");
+
+    });
+
+    const card =
+        button.closest(".theme-card");
+
+    card.classList.add("selected");
+
+    const theme =
+        card.getAttribute("data-theme");
+
+    /*
+        Store selected theme.
+        You can later send this value
+        to PHP / database using AJAX.
+    */
+
+    localStorage.setItem(
+        "selectedTheme",
+        theme
+    );
+
+    console.log(
+        "Selected Theme:",
+        theme
+    );
+
+}
+
+
+
+/* OPEN FULL PREVIEW */
+
+function openPreview(name, url){
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText = name + " - Full Preview";
+
+    document.getElementById(
+        "modalFrame"
+    ).src = url;
+
+    document.getElementById(
+        "previewModal"
+    ).classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+
+/* CLOSE PREVIEW */
+
+function closePreview(){
+
+    document.getElementById(
+        "previewModal"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "modalFrame"
+    ).src = "";
+
+    document.body.style.overflow =
+        "auto";
+
+}
+
+
+
+/* ESC KEY */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closePreview();
+
+        }
+
+    }
+);
+
+
+/* LOAD PREVIOUS SELECTION */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const saved =
+            localStorage.getItem(
+                "selectedTheme"
+            );
+
+        if(saved){
+
+            document
+                .querySelectorAll(".theme-card")
+                .forEach(card => {
+
+                    if(
+                        card.getAttribute(
+                            "data-theme"
+                        ) === saved
+                    ){
+
+                        card.classList.add(
+                            "selected"
+                        );
+
+                    }
+
+                });
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+              </html>
