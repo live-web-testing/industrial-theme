@@ -4,57 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Central Engineering Works - Website Themes</title>
+<title>Central Engineering Works - Themes</title>
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,sans-serif;
     background:#f4f7fb;
-    color:#172033;
 }
 
-/* HEADER */
 .header{
     background:linear-gradient(135deg,#061b36,#0b4f8a);
-    color:#fff;
+    color:white;
     text-align:center;
     padding:40px 20px;
-    position:relative;
-    overflow:hidden;
-}
-
-.header:after{
-    content:"";
-    position:absolute;
-    width:300px;
-    height:300px;
-    border:50px solid rgba(255,255,255,.04);
-    border-radius:50%;
-    right:-100px;
-    top:-180px;
 }
 
 .header h1{
     font-size:30px;
     margin-bottom:8px;
-    position:relative;
-    z-index:2;
 }
 
 .header p{
     color:#dcecff;
-    font-size:15px;
-    position:relative;
-    z-index:2;
 }
 
-/* CONTAINER */
 .container{
     width:92%;
     max-width:1250px;
@@ -67,8 +46,8 @@ body{
 }
 
 .heading h2{
-    font-size:28px;
     color:#092c52;
+    font-size:28px;
     margin-bottom:8px;
 }
 
@@ -76,21 +55,19 @@ body{
     color:#6c7788;
 }
 
-/* GRID */
 .theme-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:28px;
 }
 
-/* CARD */
 .theme-card{
-    background:#fff;
-    border-radius:14px;
+    background:white;
+    border-radius:15px;
     overflow:hidden;
-    box-shadow:0 8px 30px rgba(0,0,0,.09);
-    border:1px solid #e4e9f0;
-    transition:.3s ease;
+    border:1px solid #e1e7ee;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+    transition:.3s;
 }
 
 .theme-card:hover{
@@ -98,35 +75,28 @@ body{
     box-shadow:0 15px 40px rgba(0,0,0,.14);
 }
 
-/* IMAGE */
-.theme-image{
-    width:100%;
-    height:380px;
-    overflow:hidden;
+.preview{
+    height:400px;
     background:#e9edf2;
     position:relative;
+    overflow:hidden;
 }
 
-.theme-image img{
+.preview img{
     width:100%;
     height:100%;
     object-fit:cover;
     object-position:top;
     display:block;
-    transition:.5s ease;
 }
 
-.theme-card:hover .theme-image img{
-    transform:scale(1.03);
-}
-
-/* NUMBER */
 .number{
     position:absolute;
+    z-index:5;
     top:15px;
     left:15px;
     background:#e21f26;
-    color:#fff;
+    color:white;
     width:42px;
     height:42px;
     border-radius:50%;
@@ -134,34 +104,40 @@ body{
     align-items:center;
     justify-content:center;
     font-weight:bold;
-    font-size:14px;
-    box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
 
-/* CONTENT */
-.theme-content{
-    padding:20px 22px 22px;
+.loading{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#092c52;
+    font-weight:bold;
+    background:#eef2f6;
 }
 
-.theme-content h3{
+.content{
+    padding:20px;
+}
+
+.content h3{
     color:#092c52;
     font-size:21px;
     margin-bottom:8px;
 }
 
-.theme-content p{
+.content p{
     color:#707b8c;
     font-size:14px;
-    line-height:1.6;
     margin-bottom:18px;
 }
 
-/* BUTTON */
-.view-button{
+.button{
     display:inline-block;
-    text-decoration:none;
     background:#092c52;
-    color:#fff;
+    color:white;
+    text-decoration:none;
     padding:12px 20px;
     border-radius:7px;
     font-size:14px;
@@ -169,63 +145,35 @@ body{
     transition:.3s;
 }
 
-.view-button:hover{
+.button:hover{
     background:#e21f26;
 }
 
-/* FOOTER */
-.footer{
-    text-align:center;
-    padding:30px 20px;
-    color:#7b8795;
-    font-size:13px;
-}
-
-/* MOBILE */
 @media(max-width:800px){
 
     .theme-grid{
         grid-template-columns:1fr;
     }
 
-    .theme-image{
+    .preview{
         height:350px;
     }
-
 }
 
 @media(max-width:500px){
 
-    .header{
-        padding:30px 15px;
+    .preview{
+        height:300px;
     }
 
     .header h1{
         font-size:24px;
     }
-
-    .container{
-        width:94%;
-        margin:25px auto;
-    }
-
-    .heading h2{
-        font-size:23px;
-    }
-
-    .theme-image{
-        height:300px;
-    }
-
 }
 </style>
-
 </head>
 
 <body>
-
-
-<!-- HEADER -->
 
 <header class="header">
 
@@ -236,17 +184,14 @@ body{
 </header>
 
 
-<!-- MAIN -->
-
-<main class="container">
+<div class="container">
 
     <div class="heading">
 
-        <h2>Select Your Preferred Design</h2>
+        <h2>Website Theme Options</h2>
 
         <p>
-            Explore the website design concepts prepared
-            for Central Engineering Works.
+            Preview the available website designs
         </p>
 
     </div>
@@ -259,31 +204,34 @@ body{
 
         <div class="theme-card">
 
-            <div class="theme-image">
+            <div class="preview">
 
                 <span class="number">01</span>
 
+                <div class="loading">
+                    Loading Preview...
+                </div>
+
                 <img
-                    src="images/theme-01.jpg"
-                    alt="Loxicat Theme Preview"
+                    class="theme-image"
+                    data-url="https://html.xeontheme.com/loxicat/index.html"
+                    alt="Loxicat Preview"
                 >
 
             </div>
 
-            <div class="theme-content">
+            <div class="content">
 
                 <h3>Loxicat</h3>
 
                 <p>
-                    Modern industrial and engineering
-                    website design.
+                    Modern industrial and engineering website design.
                 </p>
 
                 <a
                     href="https://html.xeontheme.com/loxicat/index.html"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="view-button">
+                    class="button">
 
                     See Full Website →
 
@@ -292,38 +240,40 @@ body{
             </div>
 
         </div>
-
 
 
         <!-- THEME 02 -->
 
         <div class="theme-card">
 
-            <div class="theme-image">
+            <div class="preview">
 
                 <span class="number">02</span>
 
+                <div class="loading">
+                    Loading Preview...
+                </div>
+
                 <img
-                    src="images/theme-02.jpg"
-                    alt="Manrox Theme Preview"
+                    class="theme-image"
+                    data-url="https://live.themewild.com/manrox/index.html"
+                    alt="Manrox Preview"
                 >
 
             </div>
 
-            <div class="theme-content">
+            <div class="content">
 
                 <h3>Manrox</h3>
 
                 <p>
-                    Professional manufacturing and
-                    engineering website style.
+                    Professional manufacturing and engineering design.
                 </p>
 
                 <a
                     href="https://live.themewild.com/manrox/index.html"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="view-button">
+                    class="button">
 
                     See Full Website →
 
@@ -332,38 +282,40 @@ body{
             </div>
 
         </div>
-
 
 
         <!-- THEME 03 -->
 
         <div class="theme-card">
 
-            <div class="theme-image">
+            <div class="preview">
 
                 <span class="number">03</span>
 
+                <div class="loading">
+                    Loading Preview...
+                </div>
+
                 <img
-                    src="images/theme-03.jpg"
-                    alt="Oilix Theme Preview"
+                    class="theme-image"
+                    data-url="https://oilix-html.wpthemeverse.com/index.html"
+                    alt="Oilix Preview"
                 >
 
             </div>
 
-            <div class="theme-content">
+            <div class="content">
 
                 <h3>Oilix</h3>
 
                 <p>
-                    Strong industrial, oil and engineering
-                    focused design.
+                    Industrial and engineering focused website design.
                 </p>
 
                 <a
                     href="https://oilix-html.wpthemeverse.com/index.html"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="view-button">
+                    class="button">
 
                     See Full Website →
 
@@ -372,38 +324,40 @@ body{
             </div>
 
         </div>
-
 
 
         <!-- THEME 04 -->
 
         <div class="theme-card">
 
-            <div class="theme-image">
+            <div class="preview">
 
                 <span class="number">04</span>
 
+                <div class="loading">
+                    Loading Preview...
+                </div>
+
                 <img
-                    src="images/theme-04.jpg"
-                    alt="Phactorize Theme Preview"
+                    class="theme-image"
+                    data-url="https://themeearth.com/tf/html/phactorize/index.html"
+                    alt="Phactorize Preview"
                 >
 
             </div>
 
-            <div class="theme-content">
+            <div class="content">
 
                 <h3>Phactorize</h3>
 
                 <p>
-                    Clean and professional factory and
-                    industrial website design.
+                    Clean factory and industrial website design.
                 </p>
 
                 <a
                     href="https://themeearth.com/tf/html/phactorize/index.html"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="view-button">
+                    class="button">
 
                     See Full Website →
 
@@ -414,36 +368,38 @@ body{
         </div>
 
 
-
         <!-- THEME 05 -->
 
         <div class="theme-card">
 
-            <div class="theme-image">
+            <div class="preview">
 
                 <span class="number">05</span>
 
+                <div class="loading">
+                    Loading Preview...
+                </div>
+
                 <img
-                    src="images/theme-05.jpg"
-                    alt="Bulidx Theme Preview"
+                    class="theme-image"
+                    data-url="https://bulidx-html.vercel.app/index-3.html"
+                    alt="Bulidx Preview"
                 >
 
             </div>
 
-            <div class="theme-content">
+            <div class="content">
 
                 <h3>Bulidx</h3>
 
                 <p>
-                    Bold construction and engineering
-                    focused website layout.
+                    Bold construction and engineering website layout.
                 </p>
 
                 <a
                     href="https://bulidx-html.vercel.app/index-3.html"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="view-button">
+                    class="button">
 
                     See Full Website →
 
@@ -456,17 +412,67 @@ body{
 
     </div>
 
-</main>
+</div>
 
 
-<!-- FOOTER -->
+<script>
 
-<footer class="footer">
+document.addEventListener("DOMContentLoaded", function(){
 
-    © 2026 Central Engineering Works · Website Design Concepts
+    const images = document.querySelectorAll(".theme-image");
 
-</footer>
+    images.forEach(function(img){
 
+        const websiteURL = img.dataset.url;
+
+        /*
+         * Screenshot service
+         *
+         * The website URL is encoded and sent
+         * to the screenshot service.
+         */
+
+        const screenshotURL =
+            "https://image.thum.io/get/width/1400/" +
+            encodeURIComponent(websiteURL);
+
+
+        img.onload = function(){
+
+            const loading =
+                img.parentElement.querySelector(".loading");
+
+            if(loading){
+                loading.style.display = "none";
+            }
+
+        };
+
+
+        img.onerror = function(){
+
+            const loading =
+                img.parentElement.querySelector(".loading");
+
+            if(loading){
+                loading.innerHTML =
+                    "Preview unavailable";
+            }
+
+        };
+
+
+        /*
+         * Automatically load screenshot
+         */
+
+        img.src = screenshotURL;
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>
